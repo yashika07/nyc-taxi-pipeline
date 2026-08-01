@@ -1,0 +1,27 @@
+# Secrets
+.env
+airflow_project/.env
+
+# Data files
+data/raw/*.parquet
+data/raw/*.csv
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# dbt
+tlc_dbt/target/
+tlc_dbt/logs/
+tlc_dbt/dbt_packages/
+
+# Airflow / Astro
+airflow_project/logs/
+airflow_project/.astro/
+airflow_project/airflow_settings.yaml
+airflow_project/include/host_project/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: fact_trips
+    description: "One row per taxi trip. Core fact table for the star schema."
+    config:
+      materialized: table
+    columns:
+      - name: trip_id
+        description: "Surrogate key, hashed from trip attributes."
+        tests:
+          - unique
+          - not_null
+
+      - name: pickup_location_id
+        description: "FK to dim_zones."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_zones')
+                field: location_id
+
+      - name: dropoff_location_id
+        description: "FK to dim_zones."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_zones')
+                field: location_id
+
+      - name: pickup_date
+        description: "FK to dim_date."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_day
+
+  - name: dim_zones
+    description: "One row per NYC taxi zone."
+    config:
+      materialized: table
+    columns:
+      - name: location_id
+        description: "Primary key."
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_date
+    description: "One row per calendar day, March-June 2026."
+    config:
+      materialized: table
+    columns:
+      - name: date_day
+        description: "Primary key."
+        tests:
+          - unique
+          - not_null

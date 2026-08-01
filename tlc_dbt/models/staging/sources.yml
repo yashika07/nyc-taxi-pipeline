@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw
+    database: TLC_DB
+    schema: RAW
+    tables:
+      - name: raw_yellow_tripdata_2026_03
+      - name: raw_yellow_tripdata_2026_04
+      - name: raw_yellow_tripdata_2026_05
+      - name: raw_taxi_zone_lookup
